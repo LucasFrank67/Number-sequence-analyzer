@@ -19,17 +19,72 @@ def fibonacci():
         print(c)
 
 
-def prime_checker():
+
+def prime_checker(result):
+    if result < 2:
+        return False
+    for i in range(2, int(result**0.5) + 1):
+        if result % i == 0:
+            return False
+    return True
+    
+def prime():
     print("What number do you want to check?")
     result = int(input())
-    if result > 1:
-        for i in range(result):
-            if result % (i + 1) != 0:
-                print("The number is prime!")
-            else:
-                print("The number isn't prime, loser!")
-    else:
-        print("The number must be greater than 1, loser!")
+    is_prime = prime_checker(result)
+    if is_prime == True:
+        print("This is a prime number!")
+    elif is_prime == False:
+        print("This is NOT a prime number!")
+
+
+
+def prime_range():
+    print("Starting number: ")
+    result1 = int(input())
+    print("Ending number: ")
+    result2 = int(input())
+
+    numbers = []
+
+    for num in range(result1, result2 + 1):
+        is_prime = prime_checker(num)
+        if is_prime:
+            numbers.append(num)
+    for i in numbers:
+        print(i, end=", ")
+
+def multiply():
+    print("Number: ")
+    result1 = int(input())
+    print("Length: ")
+    result2 = int(input())
+
+    for i in range(1, result2 + 1):
+        print(f"{result1} x {i} = {result1 * i}")
+
+
+def factorial():
+    print("What number do you want the factorial of?")
+    result = int(input())
+
+    for i in range(1, result):
+        result *= i
+    print(result)
+
+def collatz():
+    print("Give a positive integer.")
+    result = int(input())
+
+    yes = []
+
+    while result != 1:
+        if result % 2 == 0:
+            result = result / 2
+        else:
+            result = (result * 3) + 1
+        yes.append(result)
+    print(f"{len(yes)} steps were needed.")
 
 def main():
     clear_console()
@@ -37,10 +92,11 @@ def main():
         print("NUMBER SEQUENCE ANALYZER!")
         print("1. Fibonacci Sequence\n")
         print("2. Prime Number Checker\n")
-        print("3. Multiplication Table\n")
-        print("4. Factorial Calculator\n")
-        print("5. Collatz Sequence\n")
-        print("6. Exit\n")
+        print("3. Prime Number Range\n")
+        print("4. Multiplication Table\n")
+        print("5. Factorial Calculator\n")
+        print("6. Collatz Sequence\n")
+        print("7. Exit\n")
         try:
             result = int(input())
         except ValueError: 
@@ -50,14 +106,16 @@ def main():
             case 1: 
                 fibonacci()
             case 2:
-                prime_checker()
+                prime()
             case 3:
-                pass
+                prime_range()
             case 4:
-                pass
+                multiply()
             case 5:
-                pass
+                factorial()
             case 6:
+                collatz()
+            case 7:
                 pass
 
 main()
